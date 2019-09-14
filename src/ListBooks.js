@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-//import CurrentlyReading from './CurrentlyReading'
-//import WantToRead from './WantToRead'
-//import Read from './Read'
 import Shelf from './Shelf'
+import { Link } from 'react-router-dom'
 
 class ListBooks extends Component {
   booksOnShelf(shelf) {
@@ -25,6 +23,9 @@ class ListBooks extends Component {
             <Shelf shelf='Want to Read' books={this.booksOnShelf('wantToRead')} onUpdateBookShelf={(book, shelf) => {onUpdateBookShelf(book, shelf)}} />
             <Shelf shelf='Read' books={this.booksOnShelf('read')} onUpdateBookShelf={(book, shelf) => {onUpdateBookShelf(book, shelf)}} />
           </div>
+        </div>
+        <div className="open-search">
+          <Link to="/search"><button>Add a book</button></Link>
         </div>
       </div>
     )
