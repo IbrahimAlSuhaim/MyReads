@@ -10,11 +10,10 @@ class SearchBook extends Component {
   }
   updateQuery = (query) => {
     this.setState(() => ({
-      query: query.trim()
+      query: query
 
     }))
     query !== '' &&
-      // this.props.search(query)
       BooksAPI.search(query)
           .then((results) => {
             this.setState(() => ({
@@ -47,12 +46,15 @@ class SearchBook extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {
-              Array.isArray(showingResult) &&
+            {Array.isArray(showingResult) &&
               showingResult.map((book) => (
-              <BookItem key={book.id} book={book} onUpdateBookShelf={onUpdateBookShelf} inList={inList} />
-            ))
-          }
+                <BookItem
+                  key={book.id}
+                  book={book}
+                  onUpdateBookShelf={onUpdateBookShelf}
+                  inList={inList} />
+                ))
+            }
           </ol>
         </div>
       </div>
