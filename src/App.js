@@ -17,6 +17,7 @@ class BooksApp extends Component {
         }))
       })
   }
+  //if a book shelf is updated then the state of books is updated
   updateBookShelf = (book, shelf) => {
     book.shelf=shelf
 
@@ -30,6 +31,7 @@ class BooksApp extends Component {
             })
       })
   }
+  // isBookInList searches for the book in books list(in the shelves) return shelf if exist or none otherwise
   isBookInList = (book2) => {
     const inList = this.state.books.filter((book1) => {
       return book1.id === book2.id
@@ -52,10 +54,16 @@ class BooksApp extends Component {
     return (
       <div className="app">
         <Route exact path="/" render={() => (
-          <ListBooks books={this.state.books} onUpdateBookShelf={this.updateBookShelf}/>
+          <ListBooks
+          books={this.state.books}
+          onUpdateBookShelf={this.updateBookShelf} />
         )} />
         <Route exact path="/search" render={() => (
-          <SearchBook onUpdateBookShelf={this.updateBookShelf} search={this.searchBook} books={this.state.books} inList={this.isBookInList}/>
+          <SearchBook
+            onUpdateBookShelf={this.updateBookShelf}
+            search={this.searchBook}
+            books={this.state.books}
+            inList={this.isBookInList} />
         )} />
       </div>
     )
