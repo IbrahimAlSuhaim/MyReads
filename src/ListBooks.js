@@ -3,6 +3,7 @@ import Shelf from './Shelf'
 import { Link } from 'react-router-dom'
 
 class ListBooks extends Component {
+  //returns what books are in the shelf
   booksOnShelf(shelf) {
     const booksOnShelf = this.props.books.filter((book) => (
       book.shelf===shelf
@@ -19,9 +20,18 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Shelf shelf='Currently Reading' books={this.booksOnShelf('currentlyReading')} onUpdateBookShelf={(book, shelf) => {onUpdateBookShelf(book, shelf)}} />
-            <Shelf shelf='Want to Read' books={this.booksOnShelf('wantToRead')} onUpdateBookShelf={(book, shelf) => {onUpdateBookShelf(book, shelf)}} />
-            <Shelf shelf='Read' books={this.booksOnShelf('read')} onUpdateBookShelf={(book, shelf) => {onUpdateBookShelf(book, shelf)}} />
+            <Shelf
+              shelf='Currently Reading'
+              books={this.booksOnShelf('currentlyReading')}
+              onUpdateBookShelf={(book, shelf) => {onUpdateBookShelf(book, shelf)}}/>
+            <Shelf
+              shelf='Want to Read'
+              books={this.booksOnShelf('wantToRead')}
+              onUpdateBookShelf={(book, shelf) => {onUpdateBookShelf(book, shelf)}} />
+            <Shelf
+              shelf='Read'
+              books={this.booksOnShelf('read')}
+              onUpdateBookShelf={(book, shelf) => {onUpdateBookShelf(book, shelf)}} />
           </div>
         </div>
         <div className="open-search">
