@@ -6,17 +6,30 @@ class BookItem extends Component {
       this.props.onUpdateBookShelf(this.props.book, e.target.value)
     }
   }
+  inAShelf = (book) => {
+    if(this.props.inList){
+      return this.props.inList(book)
+    }
+    else {
+      return "none"
+    }
+  }
   render() {
     const { book } = this.props
     return (
-      <li>
+      <li key={book.id}>
         <div className="book">
           <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: 'url('+(book.imageLinks.thumbnail)+')' }}></div>
+            <div className="book-cover" style={{ width: 128, height: 192,
+                                                backgroundImage:
+                                                  'url('+(book.imageLinks &&
+                                                    book.imageLinks.thumbnail)+')' }}></div>
             <div className="book-shelf-changer">
               <select
                 onChange={this.hundleSelect}
-                defaultValue={book.shelf}>
+                defaultValue={
+                  this.inAShelf(book)
+                  }>
                 <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
@@ -27,7 +40,8 @@ class BookItem extends Component {
           </div>
           <div className="book-title">{book.title}</div>
           <div className="book-authors">
-            {book.authors.map((author) =>
+            {book.authors &&
+              book.authors.map((author) =>
               <div key={author}>{author}<br /></div>
             )}
           </div>
