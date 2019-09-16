@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 
 class BookItem extends Component {
+  // handle selection by the dropdown book shelf changer
   hundleSelect = (e) => {
     if(this.props.onUpdateBookShelf) {
       this.props.onUpdateBookShelf(this.props.book, e.target.value)
     }
   }
+  // inAShelf is basically checks if the book is in a shelf or not. if yes, shelf value is returned otherwise "none"
   inAShelf = (book) => {
-    if(this.props.inList){
+    if(this.props.inList) {
       return this.props.inList(book)
+    }
+    else if (book.shelf) {
+      return book.shelf
     }
     else {
       return "none"
