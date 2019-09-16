@@ -22,12 +22,30 @@ class BooksApp extends Component {
 
     BooksAPI.update(book, shelf)
       .then((book) => {
-          this.setState((currentState) => ({
-            books: currentState.books.filter((b) => {
-                      return b.id !== book.id
-                    }).concat(book)
-          }))
+          BooksAPI.getAll()
+            .then((books) => {
+              this.setState(() => ({
+                books
+              }))
+            })
       })
+  }
+  isBookInList = (book2) => {
+    const inList = this.state.books.filter((book1) => {
+      return book1.id === book2.id
+    })
+    if(inList.length===0)
+      return "none"
+
+    return inList[0].shelf
+  }
+  searchBook = (query) => {
+    BooksAPI.search(query)
+        .then((books) => {
+          this.setState(() => ({
+            books
+          }))
+        })
   }
 
   render() {
@@ -37,7 +55,7 @@ class BooksApp extends Component {
           <ListBooks books={this.state.books} onUpdateBookShelf={this.updateBookShelf}/>
         )} />
         <Route exact path="/search" render={() => (
-          <SearchBook />
+          <SearchBook onUpdateBookShelf={this.updateBookShelf} search={this.searchBook} books={this.state.books} inList={this.isBookInList}/>
         )} />
       </div>
     )
