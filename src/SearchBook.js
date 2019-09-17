@@ -16,9 +16,10 @@ class SearchBook extends Component {
     query !== '' &&
       BooksAPI.search(query)
           .then((results) => {
-            this.setState(() => ({
-              results
-            }))
+            if(query === this.state.query)
+              this.setState(() => ({
+                results
+              }))
           })
   }
   clearQuery = () => {
