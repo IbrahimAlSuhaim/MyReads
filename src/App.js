@@ -41,14 +41,6 @@ class BooksApp extends Component {
 
     return inList[0].shelf
   }
-  searchBook = (query) => {
-    BooksAPI.search(query)
-        .then((books) => {
-          this.setState(() => ({
-            books
-          }))
-        })
-  }
 
   render() {
     return (
@@ -61,7 +53,6 @@ class BooksApp extends Component {
         <Route exact path="/search" render={() => (
           <SearchBook
             onUpdateBookShelf={this.updateBookShelf}
-            search={this.searchBook}
             books={this.state.books}
             inList={this.isBookInList} />
         )} />
